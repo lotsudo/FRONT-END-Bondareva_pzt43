@@ -1,0 +1,295 @@
+/*
+  style1.css — ФИКСИРОВАННАЯ верстка (Задание 1, ЛР5)
+  Вариант №1 | Twenty One Pilots Fan Site
+  Ключевая технология: Flexbox + блочная модель (box-sizing, padding, margin)
+
+  ФИКСИРОВАННАЯ верстка = все размеры заданы в пикселях (px).
+  Макет центрируется на странице через margin: 0 auto.
+*/
+
+/* ============================================================
+   CSS-переменные — единый стиль сайта
+   ============================================================ */
+:root {
+  --clr-bg:      #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent:  #c0392b;   /* красный */
+  --clr-accent2: #f5a623;   /* золотой */
+  --clr-text:    #f0f0f0;
+  --clr-muted:   #999;
+  --clr-border:  #2e2e2e;
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --gap:         10px;      /* отступ между блоками */
+
+  /* ФИКСИРОВАННЫЕ ширины (px) */
+  --w-total:  1280px;   /* общая ширина макета */
+  --w-left:   500px;    /* левая колонка (блоки 1,2,3) */
+  --w-mid:    700px;    /* центральный блок (блок 4) */
+  /* правая колонка = 1280 - 500 - 700 - gap*2 = ~60px, flex:1 возьмёт остаток */
+}
+
+
+*, *::before, *::after {
+  /*
+    box-sizing: border-box — ключевое свойство блочной модели.
+    padding и border включаются в объявленный width/height,
+    поэтому блок шириной 500px останется 500px даже с padding внутри.
+  */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  /* Минимальная ширина = ширина фиксированного макета,
+     чтобы при сужении окна появился скролл, а сетка не ломалась */
+  min-width: var(--w-total);
+}
+
+/* Гибкие изображения — масштабируются внутри своего блока */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  margin-bottom: 0.8rem;
+}
+
+/* Базовые теги */
+h1 { font-size: 2rem; }
+h2 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+  margin-bottom: 0.8rem;
+  padding-left: 0.7rem;
+  border-left: 3px solid var(--clr-accent);
+}
+p    { margin-bottom: 0.7rem; color: #ddd; }
+em   { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark { background: var(--clr-accent); color: #fff; padding: 0 4px; border-radius: 3px; }
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+cite { font-style: italic; color: var(--clr-accent2); }
+var  { color: var(--clr-accent2); font-style: normal; }
+time { color: var(--clr-accent2); font-style: italic; }
+a    { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+dt { font-family: var(--font-head); color: var(--clr-accent2); margin-top: 0.5rem; }
+dd { margin-left: 1rem; color: #ccc; font-size: 0.9rem; }
+
+/* ============================================================
+   шапка — Flexbox: логотип слева, навигация справа
+   ============================================================ */
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+}
+
+.header-inner {
+  width: var(--w-total);        /* ФИКСИРОВАННАЯ ширина шапки */
+  margin: 0 auto;               /* центрирование */
+  padding: 0.9rem 1.5rem;
+  display: flex;                /* FLEXBOX */
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Логотип */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.logo-badge {
+  /* Блочная модель: явный width + height + padding */
+  width: 40px;
+  height: 40px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+/* Навигация — Flexbox в строку */
+.main-nav {
+  display: flex;                /* FLEXBOX */
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.main-nav a:hover {
+  color: var(--clr-accent);
+  border-bottom-color: var(--clr-accent);
+}
+
+/* основной контент — центрирование макета */
+.site-main {
+  width: var(--w-total);        /* ФИКСИРОВАННАЯ ширина: 1280px */
+  margin: 0 auto;               /* центрирование по горизонтали */
+  padding: var(--gap);
+}
+
+/* Три колонки в ряд:
+   [col-left: 500px] [block-4: 700px] [col-right: остаток] */
+.content-wrapper {
+  display: flex;                /* FLEXBOX — выстраиваем колонки горизонтально */
+  flex-direction: row;
+  align-items: stretch;         /* все колонки одинаковой высоты */
+  gap: var(--gap);
+}
+
+/* Левая колонка: фиксированная ширина 500px, блоки друг под другом */
+.col-left {
+  width: var(--w-left);         /* ФИКСИРОВАННО: 500px */
+  flex-shrink: 0;               /* не сжимается */
+  display: flex;
+  flex-direction: column;       /* блоки 1,2,3 — вертикальный стек */
+  gap: var(--gap);
+}
+
+/* Центральный блок 4: фиксированная ширина 700px */
+.block-4 {
+  width: var(--w-mid);          /* ФИКСИРОВАННО: 700px */
+  flex-shrink: 0;
+}
+
+/* Правая колонка: занимает всё оставшееся место */
+.col-right {
+  flex: 1;                      /* растягивается на остаток */
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/*  стили блоков (блочная модель) */
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;       /* внутренний отступ (блочная модель) */
+  overflow: hidden;             /* содержимое не вылезает за границы */
+}
+
+/* Цветовые метки блоков для наглядности при проверке */
+.block-1 { border-top: 3px solid #3498db; }   /* синий */
+.block-2 { border-top: 3px solid #9b59b6; }   /* фиолетовый */
+.block-3 { border-top: 3px solid #27ae60; }   /* зелёный */
+.block-4 { border-top: 3px solid var(--clr-accent); } /* красный */
+.block-5 { border-top: 3px solid var(--clr-accent2); } /* золотой */
+.block-6 { border-top: 3px solid #1abc9c; }   /* бирюзовый */
+
+/* Блок 2 в левой колонке занимает оставшуюся высоту */
+.block-1 { flex-shrink: 0; }
+.block-2 { flex: 1; }
+.block-3 { flex-shrink: 0; }
+
+/* Блоки 5 и 6 делят правую колонку поровну */
+.block-5 { flex: 1; }
+.block-6 { flex: 1; }
+
+/* списки */
+.list-styled {
+  padding-left: 1.2rem;
+}
+.list-styled li {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.genre-list {
+  list-style: none;
+  padding: 0;
+}
+.genre-list li {
+  padding: 5px 0 5px 1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+.genre-list li:last-child { border-bottom: none; }
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* подвал — Flexbox: копирайт слева, соцсети справа */
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  margin-top: var(--gap);
+}
+
+.footer-inner {
+  width: var(--w-total);        /* ФИКСИРОВАННАЯ ширина подвала */
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;                /* FLEXBOX */
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  margin: 0;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1.2rem;
+}
+.footer-social a {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-social a:hover {
+  color: var(--clr-accent2);
+  border-color: var(--clr-accent2);
+}

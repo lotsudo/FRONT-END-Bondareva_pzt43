@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Фан-сайт группы Twenty One Pilots — биография, дискография, медиа и многое другое.">
+  <meta name="keywords" content="Twenty One Pilots, Tyler Joseph, Josh Dun, музыка, рок, альтернатива">
+  <meta name="author" content="Фан-сайт">
+  <title>Twenty One Pilots &mdash; Official Fan Site</title>
+
+  <!-- СПОСОБ 2: Нестандартные шрифты через Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- СПОСОБ 2: Внешний файл стилей -->
+  <!-- styles.css также подключает import.css через @import (способ 1) -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- СПОСОБ 3: Внутренняя таблица стилей -->
+  <style>
+    /* Стилизация заголовка раздела "Участники" через внутреннюю таблицу стилей */
+    #members-section h2 {
+      border-bottom: 2px solid #e03c3c;
+      padding-bottom: 0.4rem;
+      display: inline-block;
+    }
+
+    /* Оформление раздела "Дискография" — внутренняя таблица */
+    #discography caption strong {
+      font-size: 1.05rem;
+    }
+
+    /* Кнопка формы */
+    .btn-submit {
+      display: block;
+      margin-top: 1.5rem;
+    }
+
+    /* Подчёркивание ссылок в nav при наведении дополнительным эффектом */
+    nav a:visited {
+      color: #aaa;
+    }
+
+    /* Дочерний + псевдокласс: первый li в списке жанров */
+    #lists ul li:first-child {
+      font-weight: 700;
+      color: #f5a623;
+    }
+
+    /* Псевдоэлемент ::after — декор у section */
+    #about::after {
+      content: '';
+      display: block;
+      margin-top: 1.5rem;
+      height: 2px;
+      background: linear-gradient(to right, #e03c3c, transparent);
+    }
+
+    /* Единицы: относительные em/rem, абсолютные px */
+    dl dt { font-size: 1.05rem; }   /* rem */
+    dl dd { font-size: 0.95rem; }   /* rem */
+    th    { font-size: 13px; }      /* px — абсолютные */
+
+    /* Вычисляемые единицы calc() */
+    figure img { width: calc(100% / 3 - 1.5rem); min-width: 200px; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Twenty One Pilots</h1>
+
+    <!-- СПОСОБ 4: Inline (внутритеговое включение) -->
+    <p style="font-family: 'Playfair Display', serif; font-style: italic; color: #999; margin: 0.5rem 0 1rem;">
+      <em>"We stay up too late, got nothing in our brains..."</em>
+    </p>
+
+    <hr>
+    <nav>
+      <strong style="color: #e03c3c; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 0.85rem;">Навигация:</strong>
+      <a href="#about">О группе</a>
+      <a href="#members-section">Участники</a>
+      <a href="#discography">Дискография</a>
+      <a href="#media">Медиа</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#form">Анкета фаната</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <hr>
+  </header>
+
+  <main>
+
+    <!-- ======= О ГРУППЕ ======= -->
+    <section id="about">
+      <h2>О группе</h2>
+
+      <p>
+        <strong>Twenty One Pilots</strong> &mdash; американский музыкальный дуэт из
+        <mark>Колумбуса, штат Огайо</mark>, основанный в <time datetime="2009">2009 году</time>.
+        Группа известна своим уникальным жанровым смешением: <em>альтернативный рок</em>,
+        <em>инди-поп</em>, <em>рэп</em>, <em>электронная музыка</em> и <em>регги</em>.
+      </p>
+
+      <p>
+        Название группы вдохновлено пьесой Артура Миллера <cite>«Все мои сыновья»</cite>,
+        в которой <dfn>двадцать один пилот</dfn> погиб из-за решения главного героя поставить
+        прибыль выше человеческих жизней.
+      </p>
+
+      <p>
+        За годы существования группа завоевала миллионы поклонников по всему миру,
+        получила <strong>Grammy</strong> и неоднократно попадала в чарты <abbr title="Billboard Hot 100">Billboard</abbr>.
+        Их песни часто затрагивают темы <u>ментального здоровья</u>, <u>экзистенциального кризиса</u>
+        и <u>поиска смысла жизни</u>.
+      </p>
+
+      <p>
+        Группа дебютировала с независимым альбомом в 2009 году. После подписания контракта
+        с лейблом <strong>Fueled by Ramen</strong> началось их стремительное восхождение к мировой
+        известности. Сингл «Stressed Out» (изначально считавшийся нетипичным для мейнстрима)
+        стал одним из самых прослушиваемых треков <var>2015</var>&ndash;<var>2016</var> годов.
+      </p>
+
+      <!-- Пример приоритетов: класс .important-note перебивает тег p, но ID #about p имеет ещё более высокую специфичность -->
+      <p class="important-note">
+        ★ Одна из немногих групп, дебютировавших как трио и превратившихся в дуэт, сохранив при этом мировую популярность.
+      </p>
+    </section>
+
+    <hr>
+
+    <!-- ======= УЧАСТНИКИ ======= -->
+    <section id="members-section">
+      <h2>Участники группы</h2>
+
+      <article>
+        <img src="media/tyler.jpg" alt="Фото Tyler Joseph">
+        <div>
+          <h3>Tyler Joseph &mdash; вокал, клавишные, бас-гитара</h3>
+          <p>
+            Tyler Joseph &mdash; основатель и вокалист группы.
+            Тайлер Джозеф родился <time datetime="1988-12-01">1 декабря 1988 года</time> в Колумбусе, Огайо.
+            Он является главным автором песен, мелодий и концепций группы. Известен своей
+            <strong>многоплановой вокальной техникой</strong>: от рэпа до оперного пения.
+            Тайлер также открыто говорит о своей борьбе с <u>депрессией и тревожностью</u>,
+            что отражается в лирике группы.
+          </p>
+        </div>
+      </article>
+
+      <article>
+        <img src="media/josh.jpg" alt="Фото Josh Dun">
+        <div>
+          <h3>Josh Dun &mdash; ударные, труба</h3>
+          <p>
+            Josh Dun &mdash; барабанщик и перкуссионист.
+            Джош Дан родился <time datetime="1988-06-18">18 июня 1988 года</time> также в Колумбусе, Огайо.
+            Он присоединился к группе в <time datetime="2011">2011 году</time> и моментально стал
+            <em>энергетическим сердцем</em> коллектива. Джош известен своими
+            <strong>акробатическими выступлениями</strong> на барабанах прямо в зрительном зале,
+            часто во время живых концертов.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <hr>
+
+    <!-- ======= ДИСКОГРАФИЯ ======= -->
+    <section id="discography">
+      <h2>Дискография</h2>
+      <p>Полная дискография группы Twenty One Pilots с указанием альбомов, годов выпуска и ключевых синглов:</p>
+
+      <table>
+        <caption><strong>Студийные альбомы Twenty One Pilots</strong></caption>
+        <thead>
+          <tr>
+            <th rowspan="2">&#8470;</th>
+            <th rowspan="2">Название альбома</th>
+            <th rowspan="2">Год</th>
+            <th colspan="2">Ключевые синглы</th>
+            <th rowspan="2">Лейбл</th>
+          </tr>
+          <tr>
+            <th>Сингл 1</th>
+            <th>Сингл 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><em>Twenty One Pilots</em></td>
+            <td>2009</td>
+            <td>Fall Away</td>
+            <td>Trapdoor</td>
+            <td>Независимый</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><em>Regional at Best</em></td>
+            <td>2011</td>
+            <td>Implicit Demand for Proof</td>
+            <td>Isle of Flightless Birds</td>
+            <td>Независимый</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><em>Vessel</em></td>
+            <td>2013</td>
+            <td>Holding On to You</td>
+            <td>Car Radio</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+          <tr>
+            <!-- Inline-стиль: выделяем хитовый альбом (Способ 4 — дублирующий пример) -->
+            <td>4</td>
+            <td style="font-weight: bold; color: #f5a623;"><em>Blurryface</em> ★</td>
+            <td>2015</td>
+            <td>Stressed Out</td>
+            <td>Ride</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><em>Trench</em></td>
+            <td>2018</td>
+            <td>Jumpsuit</td>
+            <td>Levitate</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td><em>Scaled and Icy</em></td>
+            <td>2021</td>
+            <td>Shy Away</td>
+            <td>Saturday</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td><em>Clancy</em></td>
+            <td>2024</td>
+            <td>Overcompensate</td>
+            <td>Paladin Strait</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td><em>Breach</em></td>
+            <td>2025</td>
+            <td>Contract</td>
+            <td>City Walls</td>
+            <td>Fueled by Ramen</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6"><strong>Итого: 8 студийных альбомов (2009&ndash;2025)</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- ======= СПИСКИ ======= -->
+    <section id="lists">
+      <h2>Интересные факты и достижения</h2>
+
+      <h3>Топ-5 самых популярных песен</h3>
+      <ol>
+        <li><strong>Stressed Out</strong> &mdash; более 2 млрд стримов на Spotify</li>
+        <li><strong>Ride</strong> &mdash; культовый лирический видеоклип</li>
+        <li><strong>Heathens</strong> &mdash; саундтрек к «Отряду самоубийц»</li>
+        <li><strong>Jumpsuit</strong> &mdash; открытие эры Trench</li>
+      </ol>
+
+      <h3>Жанры музыки группы</h3>
+      <ul>
+        <li>Альтернативный рок</li>
+        <li>Инди-поп</li>
+        <li>Хип-хоп / рэп</li>
+        <li>Электронная музыка</li>
+        <li>Регги</li>
+        <li>Экспериментальный поп</li>
+      </ul>
+
+      <h3>Ключевые термины мира TOP</h3>
+      <dl>
+        <dt><strong>Blurryface</strong></dt>
+        <dd>Персонаж-альтер эго Тайлера, олицетворяющий его страхи, неуверенность и внутренний голос самокритики.</dd>
+
+        <dt><strong>Dema</strong></dt>
+        <dd>Вымышленный город-государство из концептуальной вселенной альбома Trench, символизирующий тоталитарный контроль.</dd>
+
+        <dt><strong>Clancy</strong></dt>
+        <dd>Главный герой нарратива начиная с альбома Trench &mdash; беглец, ищущий свободу из Dema.</dd>
+
+        <dt><strong>Bandito</strong></dt>
+        <dd>Группа повстанцев во вселенной twenty one pilots.</dd>
+      </dl>
+    </section>
+
+    <hr>
+
+    <!-- ======= МЕДИА ======= -->
+    <section id="media">
+      <h2>Медиа</h2>
+
+      <h3>Аудио</h3>
+      <p>Послушайте один из треков группы (локальный файл):</p>
+      <audio controls>
+        <source src="media/TwentyOnePilots-Anathema.mp3">
+        Ваш браузер не поддерживает элемент <code>&lt;audio&gt;</code>.
+        <a href="media/top_track.mp3">Скачать трек</a>
+      </audio>
+
+      <h3>Видео &mdash; официальный клип</h3>
+      <p>Официальный клип на песню <strong>«Stressed Out»</strong>:</p>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/pXRviuL6vMY"
+        title="Twenty One Pilots — Stressed Out (Official Video)"
+        allowfullscreen
+      ></iframe>
+
+      <h3>Видео &mdash; живое выступление</h3>
+      <p>Живое выступление на фестивале <strong>Lollapalooza</strong>:</p>
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/xH-UANLzT08"
+        title="Twenty One Pilots — Live at Lollapalooza"
+        allowfullscreen
+      ></iframe>
+
+      <p>Также вы можете посмотреть локальное видео:</p>
+      <video width="560" height="315" controls>
+        <source src="media/top_video.mp4" type="video/mp4">
+        Ваш браузер не поддерживает элемент <code>&lt;video&gt;</code>.
+      </video>
+    </section>
+
+    <hr>
+
+    <!-- ======= ГАЛЕРЕЯ ======= -->
+    <section id="gallery">
+      <h2>Галерея</h2>
+      <p>Фотографии группы с различных выступлений и фотосессий:</p>
+
+      <figure>
+        <img src="media/concert1.jpg" alt="Twenty One Pilots на концерте — Тайлер прыгает в толпу">
+        <figcaption>Живое выступление &mdash; Tyler Joseph прыгает в зрительный зал</figcaption>
+      </figure>
+
+      <figure>
+        <img src="media/concert2.jpg" alt="Josh Dun играет на барабанах во время концерта">
+        <figcaption>Josh Dun за барабанами во время тура Bandito</figcaption>
+      </figure>
+
+      <figure>
+        <img src="media/promo.jpg" alt="Промо-фото Twenty One Pilots — альбом Trench">
+        <figcaption>Промо-фото к альбому <em>Trench</em> (2018)</figcaption>
+      </figure>
+    </section>
+
+    <hr>
+
+    <!-- ======= ФОРМА ======= -->
+    <section id="form">
+      <h2>Анкета фаната</h2>
+
+      <strong style="font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #f5a623;">Личные данные</strong>
+
+      <label for="name">Имя:</label>
+      <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+
+      <label for="age">Возраст:</label>
+      <input type="number" id="age" name="age" min="5" max="99" placeholder="18">
+
+      <strong style="font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: #f5a623; display: block; margin: 1rem 0 0.5rem;">Ваши музыкальные предпочтения</strong>
+
+      <label for="favorite_album">Любимый альбом:</label>
+      <select id="favorite_album" name="favorite_album">
+        <option value="">-- Выберите альбом --</option>
+        <option value="vessel">Vessel (2013)</option>
+        <option value="blurryface">Blurryface (2015)</option>
+        <option value="trench">Trench (2018)</option>
+        <option value="scaled_and_icy">Scaled and Icy (2021)</option>
+        <option value="clancy">Clancy (2024)</option>
+        <option value="breach">Breach (2025)</option>
+      </select>
+
+      <label for="favorite_song">Любимая песня:</label>
+      <input type="text" id="favorite_song" name="favorite_song" placeholder="Например: Car Radio">
+
+      <p><strong>Любимый участник группы:</strong></p>
+      <input type="radio" id="tyler" name="member" value="tyler">
+      <label for="tyler">Tyler Joseph</label>
+      &nbsp;
+      <input type="radio" id="josh" name="member" value="josh">
+      <label for="josh">Josh Dun</label>
+
+      <p><strong>Где слушаете музыку?</strong> (можно выбрать несколько)</p>
+      <input type="checkbox" id="spotify" name="platform" value="spotify">
+      <label for="spotify">Spotify</label>
+      &nbsp;
+      <input type="checkbox" id="youtube" name="platform" value="youtube">
+      <label for="youtube">YouTube</label>
+      &nbsp;
+      <input type="checkbox" id="apple" name="platform" value="apple">
+      <label for="apple">Apple Music</label>
+      &nbsp;
+      <input type="checkbox" id="vk" name="platform" value="vk">
+      <label for="vk">ВКонтакте</label>
+      &nbsp;
+      <input type="checkbox" id="offline" name="platform" value="offline">
+      <label for="offline">Оффлайн / CD / Vinyl</label>
+
+      <button class="btn-submit" type="button">Отправить анкету</button>
+    </section>
+
+    <hr>
+
+    <!-- ======= КОНТАКТЫ ======= -->
+    <section id="contacts">
+      <h2>Контакты</h2>
+      <p>
+        <a href="https://www.twentyonepilots.com" target="_blank" rel="noopener noreferrer">Официальный сайт Twenty One Pilots</a>
+        &nbsp;|&nbsp;
+        <a href="https://open.spotify.com/artist/3YQKmKGau1PzlVlkL1iodx" target="_blank" rel="noopener noreferrer">Spotify</a>
+        &nbsp;|&nbsp;
+        <a href="https://www.instagram.com/twentyonepilots/" target="_blank" rel="noopener noreferrer">&#128247; Instagram</a>
+        &nbsp;|&nbsp;
+        <a href="https://twitter.com/twentyonepilots" target="_blank" rel="noopener noreferrer">&#128038; Twitter / X</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Twenty One Pilots Fan Site &mdash; Лабораторная работа №4</p>
+  </footer>
+
+</body>
+</html>

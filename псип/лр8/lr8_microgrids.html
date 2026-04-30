@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛР8 — Микросетки</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--  ВНЕШНЯЯ СЕТКА САЙТА -->
+<div class="site-grid">
+
+    <!-- Шапка -->
+    <header class="site-header">
+        <div class="logo">МойСайт</div>
+        <nav>
+            <a href="#">Главная</a>
+            <a href="#">Каталог</a>
+            <a href="#">О нас</a>
+            <a href="#">Контакты</a>
+        </nav>
+    </header>
+
+    <!-- Обычный контент сайта -->
+    <div class="content-block">
+        <h2>Добро пожаловать!</h2>
+        <p>Это демонстрация микросеток в рамках ЛР №8. Ниже встроены два компонента,
+           каждый из которых является самостоятельной микросеткой со своими внутренними
+           законами расположения элементов. Оба компонента помещены в общую
+           микросетку-обёртку <code>.microgrids-row</code>.</p>
+    </div>
+
+    <!-- ВНЕШНЯЯ МИКРОСЕТКА для компонентов  -->
+    <div class="microgrids-row">
+
+        <!-- ===== МИКРОСЕТКА №1: Форма обратного звонка ===== -->
+        <div class="callback-form">
+
+            <div class="callback-form__header">
+                <h3>Заказ обратного звонка</h3>
+                <button class="callback-form__close">✕</button>
+            </div>
+
+            <!-- Внутренняя сетка: 2 колонки -->
+            <div class="callback-form__body">
+
+                <!-- Левая часть: информация -->
+                <div class="callback-form__info">
+                    <p>Вы можете связаться с нами по телефону:</p>
+                    <span class="callback-form__phone">+7 (978) 876-55-345</span>
+                    <p>Напоминаем Вам, что наша компания создана в 2000 году и
+                       обладает большим опытом в создании форм связи.</p>
+                    <p>Наши преимущества:</p>
+                    <ul>
+                        <li>цена;</li>
+                        <li>надёжность;</li>
+                        <li>качество.</li>
+                    </ul>
+                    <p>Заполните форму справа, и наши специалисты свяжутся с вами.</p>
+                </div>
+
+                <!-- Правая часть: поля ввода -->
+                <div class="callback-form__fields">
+                    <p>Или заполните форму ниже:</p>
+                    <input type="text" placeholder="Ваше имя">
+                    <input type="tel"  placeholder="Ваш номер телефона">
+
+                    <div>
+                        <div class="time-slider-label">Выберите время</div>
+                        <div class="time-slider-row">
+                            <span class="time-badge">08:30</span>
+                            <input type="range" min="0" max="100" value="30">
+                            <span class="time-badge">20:00</span>
+                        </div>
+                    </div>
+
+                    <textarea placeholder="Ваш комментарий"></textarea>
+                    <button class="callback-form__btn">Заказать звонок</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- конец микросетки №1 -->
+
+        <!-- ===== МИКРОСЕТКА №2: Карточка товара Nikon D5300 ===== -->
+        <div class="product-card">
+
+            <!-- Внутренняя сетка: текст + фото -->
+            <div class="product-card__main">
+
+                <div class="product-card__info">
+                    <h3>Nikon D5300</h3>
+                    <p class="subtitle">18-140mm</p>
+                    <ul>
+                        <li>Любительская зеркальная фотокамера</li>
+                        <li>Байонет Nikon F</li>
+                        <li>Вес без элементов питания и объектива 480 г</li>
+                        <li>Поворотный экран 3"</li>
+                    </ul>
+                    <span class="all-specs">Все характеристики</span>
+                </div>
+
+               <img src="nikon.png" width="300" height="250">
+
+            </div>
+
+            <!-- Цена и кнопка -->
+            <div class="product-card__footer">
+                <div class="product-card__prices">
+                    <div class="product-card__price-old">69 990 р.</div>
+                    <div class="product-card__price-new">51 990 р.</div>
+                </div>
+                <button class="product-card__buy">Добавить в корзину</button>
+            </div>
+
+            <!-- Характеристики: сетка из 3 колонок -->
+            <div class="product-card__specs">
+                <div class="spec-item">
+                    <div class="spec-val">24.2</div>
+                    <div class="spec-name">Мпикс</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-val">Full HD</div>
+                    <div class="spec-name">1920×1080</div>
+                </div>
+                <div class="spec-item">
+                    <div class="spec-val">Wi-Fi</div>
+                    <div class="spec-name">Модуль</div>
+                </div>
+            </div>
+
+        </div>
+        <!-- конец микросетки №2 -->
+
+    </div>
+    <!-- конец внешней микросетки компонентов -->
+
+    <!-- Пояснительный блок -->
+    <div class="content-block">
+        <h2>О микросетках</h2>
+        <p>
+            <strong>Микросетка</strong> — самодостаточный grid/flex-контейнер, внутри которого
+            элементы подчиняются своим правилам расположения. Вне микросетки — правилам
+            родительской сетки.<br><br>
+            В данной работе реализованы:<br>
+            • <strong>.site-grid</strong> — внешняя сетка всего сайта (шапка, блоки, футер).<br>
+            • <strong>.microgrids-row</strong> — строка из двух колонок, держит обе микросетки рядом.<br>
+            • <strong>.callback-form</strong> — микросетка №1, форма со своей двухколоночной сеткой внутри.<br>
+            • <strong>.product-card</strong> — микросетка №2, карточка товара с вложенными grid-слоями.<br><br>
+            При ширине экрана менее 860px компоненты перестраиваются в одну колонку.
+        </p>
+    </div>
+
+    <footer class="site-footer">
+        ЛР №8 · Микросетки (CSS Grid) 
+    </footer>
+
+</div>
+
+</body>
+</html>

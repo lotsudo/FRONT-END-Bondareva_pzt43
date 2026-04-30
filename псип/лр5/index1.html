@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- Вариант №1 | Задание 1 | ФИКСИРОВАННАЯ верстка | ЛР5 -->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Twenty One Pilots, фан-сайт, фиксированная верстка, flexbox">
+  <meta name="description" content="Фиксированный макет — Twenty One Pilots. Вариант №1, Задание 1.">
+  <title>Вариант №1 — Задание 1 | Фиксированная верстка</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+
+  <!-- ========== шапка ========== -->
+  <header class="site-header">
+    <div class="header-inner">
+
+      <!-- Логотип -->
+      <div class="logo">
+        <span class="logo-badge">TOP</span>
+        <span class="logo-text">Twenty One Pilots</span>
+      </div>
+
+      <!-- Навигация (минимум 5 пунктов) -->
+      <nav class="main-nav" role="navigation" aria-label="Основная навигация">
+        <a href="#block1">Дискография</a>
+        <a href="#block2">Участники</a>
+        <a href="#block3">Жанры</a>
+        <a href="#block4">О группе</a>
+        <a href="#block5">Топ песен</a>
+        <a href="#block6">Достижения</a>
+      </nav>
+
+    </div>
+  </header>
+  <!-- /шапка -->
+
+  <!-- основной контент-->
+  <!--
+    СЕТКА по варианту №1 (фиксированная):
+    Блоки 1,2,3 — по 500px (левая колонка)
+    Блок 4      — 700px  (центр)
+    Блоки 5,6   — оставшееся (правая колонка)
+    Итого макет: 1280px, выравнивание по центру
+  -->
+  <main class="site-main">
+    <div class="content-wrapper">
+
+      <!-- Левая колонка: блоки 1, 2, 3 -->
+      <div class="col-left">
+
+        <section class="block block-1" id="block1">
+          <h2>1 — Дискография</h2>
+          <ol class="list-styled">
+            <li><em>Twenty One Pilots</em> — <time datetime="2009">2009</time></li>
+            <li><em>Regional at Best</em> — <time datetime="2011">2011</time></li>
+            <li><em>Vessel</em> — <time datetime="2013">2013</time></li>
+            <li><em>Blurryface</em> ★ — <time datetime="2015">2015</time></li>
+            <li><em>Trench</em> — <time datetime="2018">2018</time></li>
+            <li><em>Scaled and Icy</em> — <time datetime="2021">2021</time></li>
+            <li><em>Clancy</em> — <time datetime="2024">2024</time></li>
+            <li><em>Breach</em> — <time datetime="2025">2025</time></li>
+          </ol>
+        </section>
+
+        <section class="block block-2" id="block2">
+          <h2>2 — Участники</h2>
+          <!-- Заглушка изображения; замените на реальное: src="media/band.jpg" -->
+          <img src="https://placehold.co/480x120/1a1a2e/e03c3c?text=Tyler+Joseph+%26+Josh+Dun" alt="Участники Twenty One Pilots">
+          <p><strong>Tyler Joseph</strong> — вокал, клавишные, автор текстов.</p>
+          <p><strong>Josh Dun</strong> — ударные, перкуссия.</p>
+        </section>
+
+        <section class="block block-3" id="block3">
+          <h2>3 — Жанры</h2>
+          <ul class="genre-list">
+            <li>Альтернативный рок</li>
+            <li>Инди-поп</li>
+            <li>Хип-хоп / рэп</li>
+            <li>Электронная музыка</li>
+            <li>Регги</li>
+          </ul>
+        </section>
+
+      </div><!-- /col-left -->
+
+      <!-- Центральный блок 4 (700px) -->
+      <section class="block block-4" id="block4">
+        <h2>4 — О группе</h2>
+        <img src="https://placehold.co/660x180/0d1b2a/f5a623?text=Twenty+One+Pilots" alt="Twenty One Pilots промо">
+        <p>
+          <strong>Twenty One Pilots</strong> — американский музыкальный дуэт из
+          <mark>Колумбуса, Огайо</mark>, основанный в <time datetime="2009">2009 году</time>.
+          Группа известна своим уникальным жанровым смешением.
+        </p>
+        <p>
+          Название вдохновлено пьесой Артура Миллера <cite>«Все мои сыновья»</cite>.
+          Группа получила <strong>Grammy</strong> и неоднократно попадала
+          в чарты <abbr title="Billboard Hot 100">Billboard</abbr>.
+        </p>
+        <img src="https://placehold.co/660x140/1a0000/c0392b?text=Blurryface+Era+2015" alt="Blurryface Era">
+        <p>
+          Сингл «Stressed Out» стал одним из самых прослушиваемых треков
+          <var>2015</var>–<var>2016</var> годов.
+        </p>
+      </section>
+
+      <!-- Правая колонка: блоки 5, 6 -->
+      <div class="col-right">
+
+        <section class="block block-5" id="block5">
+          <h2>5 — Топ песен</h2>
+          <ol class="list-styled">
+            <li><strong>Stressed Out</strong> — 2+ млрд стримов</li>
+            <li><strong>Ride</strong> — культовый клип</li>
+            <li><strong>Heathens</strong> — саундтрек</li>
+            <li><strong>Jumpsuit</strong> — эра Trench</li>
+            <li><strong>Car Radio</strong> — классика</li>
+          </ol>
+        </section>
+
+        <section class="block block-6" id="block6">
+          <h2>6 — Достижения</h2>
+          <dl>
+            <dt>Grammy Award</dt>
+            <dd>Лучшее поп-дуэт выступление (2017)</dd>
+            <dt>Billboard</dt>
+            <dd>Неоднократно в Hot 100</dd>
+            <dt>Spotify</dt>
+            <dd>30+ млн слушателей/мес.</dd>
+            <dt>Lollapalooza</dt>
+            <dd>Хедлайнеры фестиваля (2019)</dd>
+          </dl>
+        </section>
+
+      </div><!-- /col-right -->
+
+    </div><!-- /content-wrapper -->
+  </main>
+  <!-- /основной контент -->
+
+  <!-- ========== подвал ========== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <p class="footer-copy">
+        &copy; <time datetime="2025">2025</time> Twenty One Pilots Fan Site
+        &mdash; Вариант №1, Задание 1, Фиксированная верстка
+      </p>
+      <!-- Ссылки на социальные сети -->
+      <nav class="footer-social" aria-label="Социальные сети">
+        <a href="https://www.instagram.com/twentyonepilots/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://twitter.com/twentyonepilots" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+        <a href="https://open.spotify.com/artist/3YQKmKGau1PzlVlkL1iodx" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a href="https://www.youtube.com/@twentyonepilots" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </nav>
+    </div>
+  </footer>
+  <!-- /подвал -->
+
+</body>
+</html>

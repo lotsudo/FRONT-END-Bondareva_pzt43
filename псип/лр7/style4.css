@@ -1,0 +1,609 @@
+/*
+  style4.css — Основной CSS для задания №5 (адаптивный макет с контентом)
+  Вариант №0 | Twenty One Pilots Fan Site
+  Верстка: Flexbox + CSS Grid
+*/
+
+/* ============================================================
+   CSS-переменные
+   ============================================================ */
+:root {
+  --clr-bg:      #0d0d0d;   /* фон страницы */
+  --clr-surface: #1a1a1a;   /* фон карточек */
+  --clr-accent:  #c0392b;   /* красный акцент */
+  --clr-accent2: #f5a623;   /* золотой акцент */
+  --clr-text:    #f0f0f0;   /* основной текст */
+  --clr-muted:   #999;      /* второстепенный текст */
+  --clr-border:  #2e2e2e;   /* границы блоков */
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --radius-lg:   14px;
+  --gap:         1.2rem;
+}
+
+/* ============================================================
+   Сброс и базовые тег-стили
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Гибкие изображения — всегда масштабируются */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Гибкие шрифты заголовков */
+h1 { font-size: clamp(1.6rem, 4vw, 2.8rem); }
+h2 { font-size: clamp(1.1rem, 2.5vw, 1.6rem); margin-bottom: 0.8rem; }
+h3 { font-size: clamp(0.95rem, 2vw, 1.15rem); margin-bottom: 0.4rem; }
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+}
+
+/* Декоратор "//" перед заголовками секций */
+h2::before { content: '// '; color: var(--clr-accent); }
+
+p  { margin-bottom: 0.9rem; color: #ddd; }
+a  { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+em { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark {
+  background: var(--clr-accent);
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+s, del { color: var(--clr-muted); }
+time { color: var(--clr-accent2); font-style: italic; }
+
+/* ============================================================
+   ШАПКА
+   ============================================================ */
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Логотип */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--clr-text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-badge {
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  letter-spacing: 0.04em;
+}
+
+.logo-text {
+  font-family: var(--font-head);
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Навигация */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem 1.2rem;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.main-nav a:hover {
+  color: var(--clr-accent);
+  border-bottom-color: var(--clr-accent);
+}
+
+/* ---- CSS-бургер без JS ---- */
+
+/* Скрываем нативный чекбокс — он нужен только для хранения состояния */
+.burger-toggle { display: none; }
+
+/* Лейбл-кнопка — скрыта на десктопе, появляется только на мобильных */
+.burger-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.burger-label span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+  transform-origin: center;
+}
+
+/*
+  Анимация в крестик через селектор ~:
+  .burger-toggle — чекбокс стоит до .header-inner в DOM,
+  поэтому ~ находит его соседа .header-inner,
+  а внутри него — .burger-label span.
+*/
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   ОСНОВНОЙ КОНТЕНТ
+   ============================================================ */
+.site-main {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+/* ---- Блок "О группе" ---- */
+.block-about {
+  background: var(--clr-surface);
+  border-left: 4px solid var(--clr-accent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: var(--gap);
+}
+
+/* ============================================================
+   СЕТКА БЛОКОВ (задание №1 образец: 1/2/3 + 4 + 5/6)
+   Десктоп: 3 колонки — левые 3 блока, широкий 4, правые 2
+   ============================================================ */
+.content-grid {
+  display: grid;
+  /* 3 узких колонки слева, 1 широкая справа */
+  grid-template-columns: repeat(3, 1fr) 2fr;
+  grid-template-rows: auto auto;
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+/* Блок 1 — дискография */
+.block-1 { grid-column: 1; grid-row: 1; }
+
+/* Блок 2 — участники */
+.block-2 { grid-column: 2; grid-row: 1 / 3; }
+
+/* Блок 3 — жанры */
+.block-3 { grid-column: 3; grid-row: 1; }
+
+/* Блок 4 — мерч (широкий, занимает всю правую колонку) */
+.block-4 { grid-column: 4; grid-row: 1 / 3; }
+
+/* Блок 5 — топ песен */
+.block-5 { grid-column: 1; grid-row: 2; }
+
+/* Блок 6 — достижения */
+.block-6 { grid-column: 3; grid-row: 2; }
+
+/* Общий вид всех блоков */
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.4rem;
+  overflow: hidden;   /* устойчивость к переполнению */
+}
+
+/* ============================================================
+   КАРТОЧКИ УЧАСТНИКОВ
+   ============================================================ */
+.member-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.member-card:last-child { border-bottom: none; }
+
+/* Аватар-заглушка */
+.member-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(192,57,43,0.5);
+}
+
+/* ============================================================
+   СПИСКИ
+   ============================================================ */
+.album-list, .top-songs {
+  padding-left: 1.2rem;
+}
+
+.album-list li,
+.top-songs li {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.genre-list {
+  list-style: none;
+  padding: 0;
+}
+
+.genre-list li {
+  padding: 4px 0 4px 1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.genre-list li:last-child { border-bottom: none; }
+
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* dl — достижения */
+dl dt {
+  font-family: var(--font-head);
+  color: var(--clr-accent2);
+  font-size: 0.95rem;
+  margin-top: 0.6rem;
+}
+
+dl dd {
+  margin-left: 1rem;
+  color: #ccc;
+  font-size: 0.88rem;
+}
+
+/* ============================================================
+   МИКРОСЕТКА МЕРЧА
+   ============================================================ */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 0.8rem;
+}
+
+.merch-card {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.merch-card:hover {
+  border-color: var(--clr-accent);
+  transform: translateY(-3px);
+}
+
+/* Изображение / иконка-заглушка */
+.merch-img {
+  aspect-ratio: 4 / 3;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  position: relative;
+}
+
+.merch-body {
+  padding: 10px 12px;
+}
+
+.merch-category {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin-bottom: 3px;
+}
+
+.merch-name {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clr-text);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.merch-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.merch-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+
+.merch-price-old {
+  font-size: 12px;
+  color: var(--clr-muted);
+}
+
+/* Бейджи */
+.merch-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-family: var(--font-head);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: var(--clr-accent);
+  color: #fff;
+}
+
+.merch-badge--new     { background: #1a6b3c; }
+.merch-badge--limited { background: #6b4d1a; }
+
+/* ============================================================
+   IFRAME с формой
+   ============================================================ */
+.block-form { margin-top: var(--gap); }
+
+.form-embed iframe {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  width: 100%;
+  min-height: 700px;
+}
+
+/* ============================================================
+   ПОДВАЛ
+   ============================================================ */
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  padding: 1.2rem 1.5rem;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  margin: 0;
+}
+
+/* Ссылки соцсетей в подвале */
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-social a:hover { color: var(--clr-accent2); border-color: var(--clr-accent2); }
+
+/* ============================================================
+   АДАПТИВНОСТЬ
+   ============================================================ */
+
+/* ---- Большие экраны 1201px+ ---- */
+@media (min-width: 1201px) {
+  .site-main { padding-left: 2.5rem; padding-right: 2.5rem; }
+}
+
+/* ---- 1025px–1200px: большие экраны ---- */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+  .block-1 { grid-column: 1; grid-row: 1; }
+  .block-2 { grid-column: 2; grid-row: 1; }
+  .block-3 { grid-column: 3; grid-row: 1; }
+  .block-4 { grid-column: 1 / -1; grid-row: 2; } /* весь ряд */
+  .block-5 { grid-column: 1; grid-row: 3; }
+  .block-6 { grid-column: 2; grid-row: 3; }
+}
+
+/* ---- 769px–1024px: ноутбуки ---- */
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+  .block-1 { grid-column: 1; grid-row: 1; }
+  .block-2 { grid-column: 2; grid-row: 1; }
+  .block-3 { grid-column: 1; grid-row: 2; }
+  .block-4 { grid-column: 1 / -1; grid-row: 3; }
+  .block-5 { grid-column: 1; grid-row: 4; }
+  .block-6 { grid-column: 2; grid-row: 4; }
+}
+
+/* ---- 481px–768px: планшеты ---- */
+@media (max-width: 768px) {
+
+  /* Показываем кнопку-бургер */
+  .burger-label { display: flex; }
+
+  /* Шапка — relative, чтобы выпадающее меню позиционировалось под ней */
+  .site-header { position: relative; }
+
+  /*
+    Меню по умолчанию скрыто через max-height: 0.
+    Используем max-height вместо display:none —
+    это позволяет добавить плавную CSS-анимацию.
+  */
+  .main-nav {
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #111;
+    border-top: 2px solid var(--clr-accent);
+    padding: 0 1.5rem;
+    gap: 0;
+    z-index: 200;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+
+  .main-nav a {
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .main-nav a:last-child { border-bottom: none; }
+
+  /*
+    Когда чекбокс отмечен — раскрываем меню.
+    Селектор читается так:
+    "чекбокс .burger-toggle в состоянии :checked,
+     затем его сосед .header-inner,
+     внутри которого .main-nav"
+  */
+  .burger-toggle:checked ~ .header-inner .main-nav {
+    max-height: 320px;
+    padding: 0.4rem 1.5rem 0.8rem;
+  }
+
+  /* Планшетная сетка */
+  .content-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .block-1 { grid-column: 1; grid-row: 1; }
+  .block-2 { grid-column: 2; grid-row: 1 / 3; }
+  .block-3 { grid-column: 1; grid-row: 2; }
+  .block-4 { grid-column: 1 / -1; grid-row: 3; }
+  .block-5 { grid-column: 1; grid-row: 4; }
+  .block-6 { grid-column: 2; grid-row: 4; }
+}
+
+/* ---- до 480px: мобильные устройства ---- */
+@media (max-width: 480px) {
+  .site-main { padding: 1rem 0.8rem 2rem; }
+
+  /* Все блоки в один столбец */
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  .block-1,
+  .block-2,
+  .block-3,
+  .block-4,
+  .block-5,
+  .block-6 {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-social { justify-content: center; }
+
+  /* Микросетка мерча — 2 колонки на маленьком экране */
+  .merch-grid { grid-template-columns: 1fr 1fr; }
+}

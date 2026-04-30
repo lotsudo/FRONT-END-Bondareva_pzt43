@@ -1,0 +1,522 @@
+/* 
+   styles.css — внешний файл стилей (способ 2)
+   
+   */
+
+/* --- CSS-переменные --- */
+:root {
+  --clr-bg: #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent: #e03c3c;
+  --clr-accent2: #f5a623;
+  --clr-text: #f0f0f0;
+  --clr-muted: #999;
+  --clr-border: #333;
+  --font-main: 'Oswald', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+  --font-quote: 'Playfair Display', serif;
+  --radius: 10px;
+  --gap: 1.5rem;
+}
+
+/* 
+   СПОСОБ 4 — импортируемый файл (import.css подключается через @import прямо здесь)
+ = */
+@import url('import.css');
+
+/* 
+   1. УНИВЕРСАЛЬНЫЙ СЕЛЕКТОР
+    */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+   2. СЕЛЕКТОР ТЕГА
+   */
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-main);
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 4rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 2.2rem); margin-bottom: 1rem; }
+h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+
+p { margin-bottom: 1rem; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--clr-border);
+  margin: 2rem 0;
+}
+
+time { color: var(--clr-accent2); font-style: italic; }
+mark {
+  background-color: var(--clr-accent);
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+cite { font-style: italic; color: var(--clr-accent2); }
+dfn  { font-style: normal; font-weight: bold; color: var(--clr-accent); }
+var  { color: var(--clr-accent2); font-style: normal; font-family: var(--font-main); }
+code { background: #222; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; color: var(--clr-accent2); }
+
+/* 
+   3. СЕЛЕКТОР КЛАССА
+    */
+.highlight { color: var(--clr-accent); font-weight: bold; }
+.muted     { color: var(--clr-muted); font-size: 0.9em; }
+
+/* 
+   4. СЕЛЕКТОР ИДЕНТИФИКАТОРА
+    */
+#about {
+  border-left: 4px solid var(--clr-accent);
+  padding-left: 1.2rem;
+}
+
+/*
+   5. ПСЕВДОКЛАСС
+   */
+nav a:hover {
+  color: var(--clr-accent);
+  text-decoration: underline wavy var(--clr-accent);
+}
+
+nav a:first-of-type { font-weight: bold; }
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--clr-accent);
+  box-shadow: 0 0 8px rgba(224, 60, 60, 0.4);
+}
+
+tr:nth-child(even) { background-color: #242424; }
+tr:hover           { background-color: #2e2e2e; transition: background 0.3s; }
+
+/* 
+   6. ПСЕВДОЭЛЕМЕНТ
+   */
+h2::before {
+  content: '// ';
+  color: var(--clr-accent);
+  font-family: var(--font-main);
+}
+
+p::first-letter {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: var(--clr-accent);
+  float: left;
+  margin-right: 2px;
+  line-height: 1;
+}
+
+/* 
+   7. ДОЧЕРНИЙ СЕЛЕКТОР (>)
+   */
+header > nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+main > section {
+  padding: 2rem 0;
+}
+
+/* 
+   8. СОСЕДНИЙ (СМЕЖНЫЙ) СЕЛЕКТОР (+)
+   */
+h3 + p { color: var(--clr-text); }
+label  + input { margin-bottom: 0.6rem; }
+
+/*
+   9. СЕЛЕКТОР АТРИБУТА
+    */
+a[target="_blank"] {
+  color: var(--clr-accent2);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--clr-accent2);
+  transition: color 0.3s;
+}
+
+a[target="_blank"]:hover { color: #fff; border-bottom-color: #fff; }
+
+input[type="text"],
+input[type="number"] {
+  background: #1e1e1e;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  transition: border-color 0.3s;
+  width: calc(100% - 24px);
+  max-width: 360px;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 1rem;
+}
+
+input[required] { border-left: 3px solid var(--clr-accent); }
+
+/* 
+   10. ОБЩИЙ СОСЕДНИЙ СЕЛЕКТОР (~)
+   */
+h2 ~ p { color: #ddd; }
+
+/* 
+   HEADER
+   */
+header {
+  background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 60%);
+  padding: 2.5rem calc(var(--gap) * 2);
+  border-bottom: 3px solid var(--clr-accent);
+  text-align: center;
+}
+
+header h1 {
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 30px rgba(224, 60, 60, 0.6);
+
+  /* АНИМАЦИЯ */
+  animation: glowTitle 3s ease-in-out infinite alternate;
+}
+
+header > p {
+  font-family: var(--font-quote);
+  color: var(--clr-muted);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin: 0.5rem 0 1.2rem;
+}
+
+header > p::first-letter { float: none; font-size: 1em; color: var(--clr-muted); }
+
+nav { justify-content: center; }
+nav a {
+  color: var(--clr-text);
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+/*
+   MAIN LAYOUT
+    */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 2rem 4rem;
+}
+
+/* 
+   ARTICLES (участники)
+    */
+article {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+article:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(224, 60, 60, 0.25);
+}
+
+article img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--clr-accent);
+  box-shadow: 0 0 16px rgba(224, 60, 60, 0.5);
+  flex-shrink: 0;
+
+  /* ТРАНСФОРМАЦИЯ при наведении — задана через article:hover img ниже */
+  transition: transform 0.4s ease;
+}
+
+article:hover img {
+  transform: scale(1.07) rotate(2deg);
+}
+
+/* 
+   ТАБЛИЦА
+    */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+caption {
+  caption-side: top;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  color: var(--clr-accent2);
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+th {
+  background: var(--clr-accent);
+  color: #fff;
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--font-main);
+  letter-spacing: 0.05em;
+}
+
+td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--clr-border);
+  color: #ddd;
+}
+
+tfoot td {
+  background: #222;
+  color: var(--clr-accent2);
+  font-style: italic;
+}
+
+/* 
+   СПИСКИ
+  */
+ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ol li { margin-bottom: 0.4rem; }
+
+/* нестандартный маркер — собственный графический маркер */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+ul li {
+  padding-left: 1.6rem;
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--clr-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--clr-accent);
+}
+
+/* dl */
+dl { margin-bottom: 1rem; }
+dt { font-family: var(--font-main); color: var(--clr-accent2); margin-top: 0.8rem; }
+dd { margin-left: 1.5rem; color: #ccc; }
+
+/* 
+   МЕДИА
+    */
+audio { display: block; margin: 1rem 0; width: 100%; max-width: 500px; accent-color: var(--clr-accent); }
+
+iframe {
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius);
+  display: block;
+  margin: 1rem 0;
+  max-width: 100%;
+}
+
+video {
+  border: 2px solid var(--clr-accent);
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+
+/*
+   ГАЛЕРЕЯ
+ */
+figure {
+  display: inline-block;
+  margin: 0.5rem;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+figure:hover { transform: scale(1.03); }
+
+figure img {
+  width: 260px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 2px solid var(--clr-border);
+  box-shadow: 4px 4px 16px rgba(0,0,0,0.6);
+  transition: box-shadow 0.3s, border-color 0.3s;
+  display: block;
+}
+
+figure:hover img {
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 20px rgba(224, 60, 60, 0.5);
+}
+
+figcaption {
+  font-size: 0.8rem;
+  color: var(--clr-muted);
+  margin-top: 0.4rem;
+  font-style: italic;
+}
+
+/*
+   ФОРМА
+   */
+#form { background: var(--clr-surface); padding: 2rem; border-radius: var(--radius); }
+
+select {
+  background: #1e1e1e;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  display: block;
+  margin-top: 4px;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 360px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+select:focus { outline: 2px solid var(--clr-accent); }
+
+input[type="radio"],
+input[type="checkbox"] { accent-color: var(--clr-accent); margin-right: 6px; }
+
+.btn-submit {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 10px 28px;
+  background: var(--clr-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+.btn-submit:hover {
+  background: #b52b2b;
+  transform: scale(1.04);
+}
+
+/* 
+   КОНТАКТЫ
+   */
+#contacts p { font-size: 1rem; }
+
+/* 
+   FOOTER
+   */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: #111;
+  color: var(--clr-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--clr-border);
+  margin-top: 3rem;
+}
+
+/* 
+   ЕДИНИЦЫ ИЗМЕРЕНИЯ: пример использования calc()
+   */
+#discography { padding: calc(1rem + 1vw); }
+
+#lists ul li { margin-left: calc(0.5rem + 4px); }
+
+/* 
+   ОФОРМЛЕНИЕ ТЕКСТА
+   = */
+u    { text-decoration: underline wavy var(--clr-accent); text-underline-offset: 3px; }
+em   { color: var(--clr-accent2); }
+strong { color: #fff; }
+del  { text-decoration: line-through; color: var(--clr-muted); }
+s    { text-decoration: line-through; }
+
+/*
+   АНИМАЦИИ / ТРАНСФОРМАЦИИ (9)
+   */
+@keyframes glowTitle {
+  from { text-shadow: 0 0 10px rgba(224,60,60,0.4); }
+  to   { text-shadow: 0 0 40px rgba(224,60,60,0.9), 0 0 60px rgba(224,60,60,0.4); }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,60,60,0.5); }
+  50%       { box-shadow: 0 0 0 10px rgba(224,60,60,0); }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+section {
+  animation: fadeSlideIn 0.6s ease both;
+}
+
+/* 
+   КАСКАДНОСТЬ — ПРИОРИТЕТЫ (10)
+   Специфичность: ID > класс > тег
+   */
+/* тег: низкий приоритет */
+p { color: #ddd; }
+
+/* класс перебивает тег */
+.important-note { color: var(--clr-accent2) !important; font-style: italic; }
+
+/* ID перебивает класс */
+#about p { color: #e8e8e8; }

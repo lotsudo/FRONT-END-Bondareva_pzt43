@@ -1,0 +1,249 @@
+/*
+  style2.css — РЕЗИНОВАЯ верстка (Задание 2, ЛР5)
+  Вариант №1 | Twenty One Pilots Fan Site
+  Ключевая технология: Flexbox + ПРОЦЕНТНЫЕ ширины (%)
+
+  РЕЗИНОВАЯ верстка = ширины колонок в процентах, макет на 100% окна.
+  В отличие от фиксированной (px), блоки растягиваются вместе с окном.
+
+  Ширины по заданию:
+    Блоки 1, 2, 3 (col-left) — 30%
+    Блок 4                   — 40%
+    Блоки 5, 6 (col-right)   — оставшееся (~30% минус gap)
+*/
+
+/* CSS-переменные */
+:root {
+  --clr-bg:      #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent:  #c0392b;
+  --clr-accent2: #f5a623;
+  --clr-text:    #f0f0f0;
+  --clr-muted:   #999;
+  --clr-border:  #2e2e2e;
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --gap:         1%;            /* РЕЗИНОВЫЙ отступ — тоже в процентах */
+}
+
+/* сброс и блочная модель */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  /* Нет min-width — резиновый макет сжимается вместе с окном */
+}
+
+img {
+  max-width: 100%;  /* гибкое изображение */
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  margin-bottom: 0.8rem;
+}
+
+h2 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+  margin-bottom: 0.8rem;
+  padding-left: 0.7rem;
+  border-left: 3px solid var(--clr-accent);
+}
+p    { margin-bottom: 0.7rem; color: #ddd; }
+em   { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark { background: var(--clr-accent); color: #fff; padding: 0 4px; border-radius: 3px; }
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+cite { font-style: italic; color: var(--clr-accent2); }
+var  { color: var(--clr-accent2); font-style: normal; }
+time { color: var(--clr-accent2); font-style: italic; }
+a    { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+dt { font-family: var(--font-head); color: var(--clr-accent2); margin-top: 0.5rem; }
+dd { margin-left: 1rem; color: #ccc; font-size: 0.9rem; }
+
+/* шапка — 100% ширины */
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+  width: 100%;                  /* РЕЗИНОВО: на всю ширину окна */
+}
+
+.header-inner {
+  width: 100%;                  /* РЕЗИНОВО: 100% */
+  padding: 0.9rem 1.5rem;
+  display: flex;                /* FLEXBOX */
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.logo-badge {
+  width: 40px;
+  height: 40px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.main-nav a:hover {
+  color: var(--clr-accent);
+  border-bottom-color: var(--clr-accent);
+}
+
+/* основной контент — 100% ширины */
+.site-main {
+  width: 100%;                  /* РЕЗИНОВО: 100% */
+  padding: var(--gap);
+}
+
+/* сетка — FLEXBOX с ПРОЦЕНТНЫМИ ширинами */
+.content-wrapper {
+  display: flex;                /* FLEXBOX */
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--gap);
+  width: 100%;
+}
+
+/* Левая колонка: 30% — по заданию */
+.col-left {
+  width: 30%;                   /* РЕЗИНОВО: 30% */
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* Центральный блок 4: 40% — по заданию */
+.block-4 {
+  width: 40%;                   /* РЕЗИНОВО: 40% */
+  flex-shrink: 0;
+}
+
+/* Правая колонка: оставшееся место */
+.col-right {
+  flex: 1;                      /* занять всё оставшееся */
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* стили блоков */
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  overflow: hidden;
+}
+
+/* Цветовые метки блоков */
+.block-1 { border-top: 3px solid #3498db; }
+.block-2 { border-top: 3px solid #9b59b6; }
+.block-3 { border-top: 3px solid #27ae60; }
+.block-4 { border-top: 3px solid var(--clr-accent); }
+.block-5 { border-top: 3px solid var(--clr-accent2); }
+.block-6 { border-top: 3px solid #1abc9c; }
+
+.block-1 { flex-shrink: 0; }
+.block-2 { flex: 1; }
+.block-3 { flex-shrink: 0; }
+.block-5 { flex: 1; }
+.block-6 { flex: 1; }
+
+/*списки */
+.list-styled { padding-left: 1.2rem; }
+.list-styled li { margin-bottom: 0.35rem; font-size: 0.9rem; color: #ccc; }
+
+.genre-list { list-style: none; padding: 0; }
+.genre-list li {
+  padding: 5px 0 5px 1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+.genre-list li:last-child { border-bottom: none; }
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/*подвал */
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  margin-top: var(--gap);
+  width: 100%;
+}
+.footer-inner {
+  width: 100%; /* РЕЗИНОВО: 100% */
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.footer-copy { font-size: 0.82rem; color: var(--clr-muted); margin: 0; }
+.footer-social { display: flex; gap: 1.2rem; }
+.footer-social a {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-social a:hover { color: var(--clr-accent2); border-color: var(--clr-accent2); }

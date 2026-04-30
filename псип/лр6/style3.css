@@ -1,0 +1,216 @@
+/*
+  style3.css — CSS GRID верстка (Задание 3, ЛР6)
+  Вариант №1 | Twenty One Pilots Fan Site
+  Ключевая технология: CSS Grid
+
+  
+*/
+
+/* CSS-переменные */
+:root {
+  --clr-bg:      #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent:  #c0392b;
+  --clr-accent2: #f5a623;
+  --clr-text:    #f0f0f0;
+  --clr-muted:   #999;
+  --clr-border:  #2e2e2e;
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --gap:         10px;
+}
+
+/* сброс */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  display: grid;
+  /*
+    GRID на уровне страницы:
+    Шапка — 1 строка (auto)
+    Контент — 1 строка (1fr — занимает всё доступное место)
+    Подвал — 1 строка (auto)
+    Это классический приём "sticky footer" через Grid.
+  */
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; border-radius: var(--radius); margin-bottom: 0.8rem; }
+
+h2 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+  margin-bottom: 0.8rem;
+  padding-left: 0.7rem;
+  border-left: 3px solid var(--clr-accent);
+}
+p    { margin-bottom: 0.7rem; color: #ddd; }
+em   { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark { background: var(--clr-accent); color: #fff; padding: 0 4px; border-radius: 3px; }
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+cite { font-style: italic; color: var(--clr-accent2); }
+var  { color: var(--clr-accent2); font-style: normal; }
+time { color: var(--clr-accent2); font-style: italic; }
+a    { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+dt { font-family: var(--font-head); color: var(--clr-accent2); margin-top: 0.5rem; }
+dd { margin-left: 1rem; color: #ccc; font-size: 0.9rem; }
+
+/*шапка — Grid внутри: логотип + навигация*/
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+  padding: 0.9rem 1.5rem;
+  /* Grid внутри шапки: 2 колонки — логотип слева, nav справа */
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-badge {
+  width: 40px; height: 40px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius);
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 1.2rem; font-weight: 700;
+  text-transform: uppercase; color: #fff; letter-spacing: 0.05em;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: flex-end;   /* навигация прижата вправо */
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.main-nav a:hover { color: var(--clr-accent); border-bottom-color: var(--clr-accent); }
+
+/* основной контент */
+.site-main {
+  padding: var(--gap);
+}
+
+/*главная GRID-сетка блоков*/
+.grid-wrapper {
+  display: grid;   /* CSS GRID */
+
+  /*
+    5 колонок:
+    блок1(1fr) блок2(1fr) блок3(1fr) блок4(1.4fr) блок5-6(1fr)
+  */
+  grid-template-columns: 1fr 1fr 1fr 1.4fr 1fr;
+
+  /* 2 строки одинаковой высоты */
+  grid-template-rows: 1fr 1fr;
+
+  /*
+    Именованные области — самый наглядный способ задать сетку.
+    Читается как таблица: каждая строка = строка сетки.
+    Повторение имени (block4) = объединение ячеек (span).
+  */
+  grid-template-areas:
+    "block1 block2 block3 block4 block5"
+    "block1 block2 block3 block4 block6";
+
+  gap: var(--gap);
+  min-height: 500px;
+}
+
+/* Привязка блоков к именованным областям */
+.block-1 { grid-area: block1; }
+.block-2 { grid-area: block2; }
+.block-3 { grid-area: block3; }
+.block-4 { grid-area: block4; }
+.block-5 { grid-area: block5; }
+.block-6 { grid-area: block6; }
+
+/* стили блоков */
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  overflow: hidden;
+}
+
+/* Цветовые метки блоков */
+.block-1 { border-top: 3px solid #3498db; }
+.block-2 { border-top: 3px solid #9b59b6; }
+.block-3 { border-top: 3px solid #27ae60; }
+.block-4 { border-top: 3px solid var(--clr-accent); }
+.block-5 { border-top: 3px solid var(--clr-accent2); }
+.block-6 { border-top: 3px solid #1abc9c; }
+
+/* списки */
+.list-styled { padding-left: 1.2rem; }
+.list-styled li { margin-bottom: 0.35rem; font-size: 0.9rem; color: #ccc; }
+
+.genre-list { list-style: none; padding: 0; }
+.genre-list li {
+  padding: 5px 0 5px 1rem;
+  position: relative;
+  font-size: 0.9rem; color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+.genre-list li:last-child { border-bottom: none; }
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* подвал — Grid: копирайт слева, соцсети справа*/
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  padding: 1rem 1.5rem;
+  /* Grid внутри подвала: 2 колонки */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-copy { font-size: 0.82rem; color: var(--clr-muted); }
+.footer-social { display: flex; gap: 1.2rem; }
+.footer-social a {
+  font-size: 0.82rem; color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-social a:hover { color: var(--clr-accent2); border-color: var(--clr-accent2); }

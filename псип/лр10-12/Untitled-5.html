@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+
+let s1 = "Я люблю Беларусь";
+let s2 = "Я учусь в Политехническом колледже";
+
+document.write("Строка S2: " + s2 + "<br>");
+document.write("Длина S2: " + s2.length + "<br><br>");
+
+let n = 1;
+
+let symbol = s1.charAt(n - 1);
+
+document.write("Символ №" + n + ": " + symbol + "<br>");
+document.write("Код символа: " + symbol.charCodeAt(0) + "<br><br>");
+
+let newStr = s1.replace("Беларусь", "Гродно");
+
+document.write("После замены: " + newStr);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+/*
+  style4-flex.css — Основной CSS для задания №5 (адаптивный макет с контентом)
+  Вариант №1 | Twenty One Pilots Fan Site
+  Верстка: Flexbox (GRID удалён)
+*/
+
+/* ============================================================
+   CSS-переменные
+   ============================================================ */
+:root {
+  --clr-bg:      #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent:  #c0392b;
+  --clr-accent2: #f5a623;
+  --clr-text:    #f0f0f0;
+  --clr-muted:   #999;
+  --clr-border:  #2e2e2e;
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --radius-lg:   14px;
+  --gap:         1.2rem;
+}
+
+/* ============================================================
+   Сброс и базовые стили
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1 { font-size: clamp(1.6rem, 4vw, 2.8rem); }
+h2 { font-size: clamp(1.1rem, 2.5vw, 1.6rem); margin-bottom: 0.8rem; }
+h3 { font-size: clamp(0.95rem, 2vw, 1.15rem); margin-bottom: 0.4rem; }
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+}
+
+h2::before { content: '// '; color: var(--clr-accent); }
+
+p  { margin-bottom: 0.9rem; color: #ddd; }
+a  { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+em { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark {
+  background: var(--clr-accent);
+  color: #fff;
+  padding: 0 4px;
+  border-radius: 3px;
+}
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+time { color: var(--clr-accent2); font-style: italic; }
+
+/* ============================================================
+   ШАПКА
+   ============================================================ */
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--clr-text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-badge {
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+}
+
+.logo-text {
+  font-family: var(--font-head);
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem 1.2rem;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.main-nav a:hover {
+  color: var(--clr-accent);
+  border-bottom-color: var(--clr-accent);
+}
+
+/* Бургер */
+.burger-toggle { display: none; }
+
+.burger-label {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.burger-label span {
+  width: 24px;
+  height: 2px;
+  background: var(--clr-text);
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(2) {
+  opacity: 0;
+}
+.burger-toggle:checked ~ .header-inner .burger-label span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================
+   ОСНОВНОЙ КОНТЕНТ
+   ============================================================ */
+.site-main {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+
+.block-about {
+  background: var(--clr-surface);
+  border-left: 4px solid var(--clr-accent);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  padding: 1.5rem 1.8rem;
+  margin-bottom: var(--gap);
+}
+
+/* ============================================================
+   FLEX‑СЕТКА вместо GRID
+   ============================================================ */
+.content-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  margin-bottom: var(--gap);
+}
+
+/* Общий вид блоков */
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.4rem;
+  overflow: hidden;
+}
+
+/* ДЕСКТОП — 5 колонок (20% + 20% + 20% + 40% + 20% + 20%) */
+.block-1,
+.block-2,
+.block-3,
+.block-5,
+.block-6 {
+  flex: 0 0 calc(20% - var(--gap));
+}
+
+.block-4 {
+  flex: 0 0 calc(40% - var(--gap));
+}
+
+/* ПЛАНШЕТЫ — 2 колонки */
+@media (max-width: 1024px) {
+  .block-1,
+  .block-2,
+  .block-3,
+  .block-5,
+  .block-6 {
+    flex: 0 0 calc(50% - var(--gap));
+  }
+
+  .block-4 {
+    flex: 0 0 100%;
+  }
+}
+
+/* МОБИЛЬНЫЕ — 1 колонка */
+@media (max-width: 768px) {
+  .block-1,
+  .block-2,
+  .block-3,
+  .block-4,
+  .block-5,
+  .block-6 {
+    flex: 0 0 100%;
+  }
+}
+
+/* ============================================================
+   КАРТОЧКИ УЧАСТНИКОВ
+   ============================================================ */
+.member-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.member-card:last-child { border-bottom: none; }
+
+.member-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   СПИСКИ
+   ============================================================ */
+.album-list, .top-songs { padding-left: 1.2rem; }
+
+.album-list li,
+.top-songs li {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.genre-list { list-style: none; padding: 0; }
+
+.genre-list li {
+  padding: 4px 0 4px 1rem;
+  position: relative;
+  font-size: 0.9rem;
+  color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.genre-list li:last-child { border-bottom: none; }
+
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* ============================================================
+   МИКРОСЕТКА МЕРЧА (оставляем GRID)
+   ============================================================ */
+.merch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 0.8rem;
+}
+
+.merch-card {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.merch-card:hover {
+  border-color: var(--clr-accent);
+  transform: translateY(-3px);
+}
+
+.merch-img {
+  aspect-ratio: 4 / 3;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+}
+
+.merch-body { padding: 10px 12px; }
+
+.merch-category {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  margin-bottom: 3px;
+}
+
+.merch-name {
+  font-family: var(--font-head);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clr-text);
+  margin-bottom: 6px;
+}
+
+.merch-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.merch-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+
+.merch-price-old {
+  font-size: 12px;
+  color: var(--clr-muted);
+}
+
+.merch-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 10px;
+  font-family: var(--font-head);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: var(--clr-accent);
+  color: #fff;
+}
+
+.merch-badge--new     { background: #1a6b3c; }
+.merch-badge--limited { background: #6b4d1a; }
+
+/* ============================================================
+   IFRAME
+   ============================================================ */
+.block-form { margin-top: var(--gap); }
+
+.form-embed iframe {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  width: 100%;
+  min-height: 700px;
+}
+
+/* ============================================================
+   ПОДВАЛ
+   ============================================================ */
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  padding: 1.2rem 1.5rem;
+  margin-top: auto;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  font-size: 0.82rem;
+  color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-social a:hover {
+  color: var(--clr-accent2);
+  border-color: var(--clr-accent2);
+}
+
+/* ============================================================
+   АДАПТИВНОСТЬ
+   ============================================================ */
+@media (max-width: 768px) {
+  .burger-label { display: flex; }
+
+  .main-nav {
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: #111;
+    border-top: 2px solid var(--clr-accent);
+    padding: 0 1.5rem;
+    transition: max-height 0.35s ease;
+  }
+
+  .main-nav a {
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid var(--clr-border);
+  }
+
+  .burger-toggle:checked ~ .header-inner .main-nav {
+    max-height: 320px;
+    padding: 0.4rem 1.5rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-main { padding: 1rem 0.8rem 2rem; }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-social { justify-content: center; }
+
+  .merch-grid { grid-template-columns: 1fr 1fr; }
+}

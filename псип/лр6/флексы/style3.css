@@ -1,0 +1,219 @@
+/*
+  style3-flex.css — верстка ФЛЕКСАМИ (Задание 3, ЛР6)
+  Вариант №1 | Twenty One Pilots Fan Site
+*/
+
+/* CSS-переменные */
+:root {
+  --clr-bg:      #0d0d0d;
+  --clr-surface: #1a1a1a;
+  --clr-accent:  #c0392b;
+  --clr-accent2: #f5a623;
+  --clr-text:    #f0f0f0;
+  --clr-muted:   #999;
+  --clr-border:  #2e2e2e;
+  --font-head:   'Oswald', sans-serif;
+  --font-body:   'Roboto', sans-serif;
+  --radius:      8px;
+  --gap:         10px;
+}
+
+/* сброс */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+
+  /* sticky footer через flex */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+img { max-width: 100%; height: auto; display: block; border-radius: var(--radius); margin-bottom: 0.8rem; }
+
+h2 {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--clr-text);
+  margin-bottom: 0.8rem;
+  padding-left: 0.7rem;
+  border-left: 3px solid var(--clr-accent);
+}
+p    { margin-bottom: 0.7rem; color: #ddd; }
+em   { color: var(--clr-accent2); }
+strong { color: #fff; }
+mark { background: var(--clr-accent); color: #fff; padding: 0 4px; border-radius: 3px; }
+abbr { text-decoration: underline dotted var(--clr-muted); cursor: help; }
+cite { font-style: italic; color: var(--clr-accent2); }
+var  { color: var(--clr-accent2); font-style: normal; }
+time { color: var(--clr-accent2); font-style: italic; }
+a    { color: var(--clr-accent2); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+dt { font-family: var(--font-head); color: var(--clr-accent2); margin-top: 0.5rem; }
+dd { margin-left: 1rem; color: #ccc; font-size: 0.9rem; }
+
+/* шапка — теперь flex */
+.site-header {
+  background: linear-gradient(135deg, #1c0000 0%, #0d0d0d 70%);
+  border-bottom: 3px solid var(--clr-accent);
+  padding: 0.9rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-badge {
+  width: 40px; height: 40px;
+  background: var(--clr-accent);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius);
+}
+.logo-text {
+  font-family: var(--font-head);
+  font-size: 1.2rem; font-weight: 700;
+  text-transform: uppercase; color: #fff; letter-spacing: 0.05em;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.main-nav a {
+  font-family: var(--font-head);
+  font-size: 0.85rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--clr-text);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.main-nav a:hover { color: var(--clr-accent); border-bottom-color: var(--clr-accent); }
+
+/* основной контент */
+.site-main {
+  padding: var(--gap);
+  flex: 1 0 auto; /* чтобы main растягивался между header и footer */
+}
+
+/* главная "сетка" блоков — FLEX вместо GRID */
+.grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  min-height: 500px;
+}
+
+/*
+  Приблизительно повторяем 5 колонок:
+  - блоки 1,2,3,5,6 — по 20%
+  - блок 4 — 40%
+  Итого: 20 + 20 + 20 + 40 = 100% (первые 4 блока в строке),
+  блоки 5 и 6 уходят на вторую строку.
+*/
+
+.block {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  overflow: hidden;
+}
+
+/* базовая ширина для всех блоков */
+.block-1,
+.block-2,
+.block-3,
+.block-5,
+.block-6 {
+  flex: 0 0 20%;
+}
+
+.block-4 {
+  flex: 0 0 40%;
+}
+
+/* порядок оставляем естественный (1–6) */
+
+/* Цветовые метки блоков */
+.block-1 { border-top: 3px solid #3498db; }
+.block-2 { border-top: 3px solid #9b59b6; }
+.block-3 { border-top: 3px solid #27ae60; }
+.block-4 { border-top: 3px solid var(--clr-accent); }
+.block-5 { border-top: 3px solid var(--clr-accent2); }
+.block-6 { border-top: 3px solid #1abc9c; }
+
+/* списки */
+.list-styled { padding-left: 1.2rem; }
+.list-styled li { margin-bottom: 0.35rem; font-size: 0.9rem; color: #ccc; }
+
+.genre-list { list-style: none; padding: 0; }
+.genre-list li {
+  padding: 5px 0 5px 1rem;
+  position: relative;
+  font-size: 0.9rem; color: #ccc;
+  border-bottom: 1px solid var(--clr-border);
+}
+.genre-list li:last-child { border-bottom: none; }
+.genre-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* подвал — тоже flex */
+.site-footer {
+  background: #111;
+  border-top: 1px solid var(--clr-border);
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-copy { font-size: 0.82rem; color: var(--clr-muted); }
+.footer-social { display: flex; gap: 1.2rem; }
+.footer-social a {
+  font-size: 0.82rem; color: var(--clr-muted);
+  border-bottom: 1px dashed var(--clr-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-social a:hover { color: var(--clr-accent2); border-color: var(--clr-accent2); }
+
+/* простая адаптивность: на узких экранах блоки в столбик */
+@media (max-width: 900px) {
+  .block-1,
+  .block-2,
+  .block-3,
+  .block-4,
+  .block-5,
+  .block-6 {
+    flex: 0 0 100%;
+  }
+}
